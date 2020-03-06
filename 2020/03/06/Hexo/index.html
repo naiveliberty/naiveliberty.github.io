@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/little_black.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/little_black.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/little_black.png">
+  <link rel="mask-icon" href="/uploads/little_black.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Hexo搭建免费博客 + Github部署">
+<meta property="og:url" content="http://yoursite.com/2020/03/06/Hexo/index.html">
+<meta property="og:site_name" content="naiveliberty">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2020/03/06/Hexo/ACG.GY_40.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/03/06/Hexo/myblogs.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/06/Hexo/next.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/06/Hexo/touxaing.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/06/Hexo/livere-get-code.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/06/Hexo/addimage.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/06/Hexo/search.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/06/Hexo/create.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/06/Hexo/ssh.png">
+<meta property="article:published_time" content="2020-03-06T07:09:10.000Z">
+<meta property="article:modified_time" content="2020-03-06T14:00:20.520Z">
+<meta property="article:author" content="naiveliberty">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/06/Hexo/ACG.GY_40.jpg">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/06/Hexo/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>Hexo搭建免费博客 + Github部署 | naiveliberty</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">naiveliberty</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/06/Hexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/little_black.png">
+      <meta itemprop="name" content="naiveliberty">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="naiveliberty">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo搭建免费博客 + Github部署
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-06 15:09:10 / 修改时间：22:00:20" itemprop="dateCreated datePublished" datetime="2020-03-06T15:09:10+08:00">2020-03-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%83%A8%E7%BD%B2/" itemprop="url" rel="index"><span itemprop="name">部署</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <img src="/2020/03/06/Hexo/ACG.GY_40.jpg" class="">
+
+<a id="more"></a>
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>自己工作或学习中难免会遇到一些难题，找个地方记录下面，方便日后查阅，避免重复搜索同样的问题！！</p>
+<p>今天我们就利用 Hexo + Github 来搭建一套永久免费的个人博客。</p>
+<br>
+
+<h2 id="本地环境"><a href="#本地环境" class="headerlink" title="本地环境"></a>本地环境</h2><ul>
+<li><p>os : windows10 x64</p>
+</li>
+<li><p>Node.js : 12.16.1</p>
+</li>
+<li><p>Git : 2.25.1</p>
+</li>
+<li><p>Hexo : 4.2.0</p>
+</li>
+<li><p>Next : 7.7.2</p>
+</li>
+</ul>
+<br>
+
+<br>
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h3><ul>
+<li><p>Node.js 下载地址：<code>https://nodejs.org/en/download/</code></p>
+</li>
+<li><p>安装步骤：默认下一步</p>
+</li>
+<li><p><code>node -v</code> 测试安装是否成功</p>
+</li>
+<li><p>安装 <code>cnpm</code>，命令提示符执行：</p>
+<p> <code>npm install cnpm -g --registry=https://registry.npm.taobao.org</code></p>
+</li>
+</ul>
+<br>
+
+<h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><ul>
+<li>Git 下载地址 ：<code>https://git-scm.com/downloads</code></li>
+<li>安装步骤：默认下一步</li>
+<li><code>git --version</code>测试安装是否成功</li>
+<li>成功安装后，可以通过鼠标右键，在当前目录调用 Git，<code>Git Bash Here</code></li>
+</ul>
+<br>
+
+<h3 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h3><ul>
+<li><p>创建一个文件夹用来存放自己的博客文件，例如：<code>D:\myblogs</code></p>
+</li>
+<li><p>进入该目录右键鼠标点击<code>Git Bash Here</code>,打开 git 控制台窗口，<strong>之后的操作都在此窗口下进行</strong></p>
+</li>
+<li><p><code>cnpm i hexo-cli -g</code>安装 Hexo</p>
+</li>
+<li><p><code>hexo -v</code>验证是否安装成功</p>
+</li>
+<li><p>安装成功后，<code>hexo init</code>初始化文件夹，生成本地网站的配置</p>
+<img src="/2020/03/06/Hexo/myblogs.png" class="" title="D:\myblogs目录结构">
+</li>
+<li><p><code>hexo g</code>生成静态网页</p>
+</li>
+<li><p><code>hexo s</code>开启本地服务，在浏览器代开<code>http://localhost:4000/</code>，就可以看到博客页面了</p>
+</li>
+<li><p>在控制台使用 <code>ctrl+c</code> 关闭本地服务</p>
+</li>
+</ul>
+<br>
+
+<h3 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h3><ul>
+<li><p>在 <code>D:\myblogs</code>目录下执行以下命令，下载最新版本 Next 主题</p>
+</li>
+<li><p><code>git clone https://github.com/iissnan/hexo-theme-next themes/next</code></p>
+</li>
+<li><p>下载完毕后会在 <code>D:\myblogs\themes</code>目录下生成 next 目录</p>
+<img src="/2020/03/06/Hexo/next.png" class="" title="D:\myblogs\themes\next目录结构">
+
+</li>
+</ul>
+<br>
+
+<br>
+
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p><strong>关于配置文件</strong></p>
+<ul>
+<li>站点配置文件：<code>D:\myblogs\_config.yml</code></li>
+<li>Next 主题配置文件：<code>D:\myblogs\themes\next\_config.yml</code></li>
+</ul>
+<h3 id="启用主题"><a href="#启用主题" class="headerlink" title="启用主题"></a>启用主题</h3><p>修改<strong>站点配置文件</strong>， theme的值为 next</p>
+<p><code>D:\myblogs\_config.yml</code>，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="验证主题"><a href="#验证主题" class="headerlink" title="验证主题"></a>验证主题</h3><ul>
+<li><code>hexo s</code>开启本地服务，在浏览器中访问<code>http://localhost:4000/</code>，就可以看到 Next 主题页面了</li>
+</ul>
+<br>
+
+<h3 id="主题设定"><a href="#主题设定" class="headerlink" title="主题设定"></a>主题设定</h3><p><strong>选择 Scheme</strong></p>
+<p>Scheme 是 NexT 提供的一种特性，借助于 Scheme，NexT 为你提供多种不同的外观。同时，几乎所有的配置都可以 在 Scheme 之间共用。</p>
+<p>Scheme 的切换通过更改 <strong>主题配置文件</strong>，搜索 scheme 关键字。 你会看到有四行 scheme 的配置，将你需用启用的 scheme 前面注释 <code>#</code> 去除即可。</p>
+<p><code>D:\myblogs\themes\next\_config.yml</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Schemes</span><br><span class="line"># scheme: Muse</span><br><span class="line"># scheme: Mist</span><br><span class="line">scheme: Pisces</span><br><span class="line">#scheme: Gemini</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="设置语言"><a href="#设置语言" class="headerlink" title="设置语言"></a>设置语言</h3><p>修改<strong>站点配置文件</strong>， 将 <code>language</code> 设置成你所需要的语言。建议明确设置你所需要的语言，例如选用简体中文，配置如下：</p>
+<p><code>D:\myblogs\_config.yml</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">language: zh-CN</span><br></pre></td></tr></table></figure>
+
+<p>重启服务后生效</p>
+<br>
+
+<h3 id="设置菜单"><a href="#设置菜单" class="headerlink" title="设置菜单"></a>设置菜单</h3><p>菜单配置包括三个部分</p>
+<ol>
+<li>第一是菜单项对应的名称</li>
+<li>第二是菜单项对应的 url</li>
+<li>第三是菜单项对应的图标</li>
+</ol>
+<p>NexT 使用的是 <a href="http://fontawesome.io/" target="_blank" rel="noopener">Font Awesome</a> 提供的图标， Font Awesome 提供了 600+ 的图标，可以满足绝大的多数的场景，同时无须担心在 Retina 屏幕下 图标模糊的问题。</p>
+<p>NexT 默认的菜单项有：</p>
+<table>
+<thead>
+<tr>
+<th align="left">键值</th>
+<th align="left">显示文本（简体中文）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">home</td>
+<td align="left">首页</td>
+</tr>
+<tr>
+<td align="left">about</td>
+<td align="left">关于</td>
+</tr>
+<tr>
+<td align="left">tags</td>
+<td align="left">标签</td>
+</tr>
+<tr>
+<td align="left">categories</td>
+<td align="left">分类</td>
+</tr>
+<tr>
+<td align="left">archives</td>
+<td align="left">归档</td>
+</tr>
+<tr>
+<td align="left">schedule</td>
+<td align="left">日程表</td>
+</tr>
+<tr>
+<td align="left">sitemap</td>
+<td align="left">站点地图</td>
+</tr>
+<tr>
+<td align="left">commonweal</td>
+<td align="left">公益404</td>
+</tr>
+</tbody></table>
+<p>编辑 <strong>主题配置文件</strong>，去掉你想打开的菜单项前面的注释即可：</p>
+<p><code>D:\myblogs\themes\next\_config.yml</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: &#x2F; || home</span><br><span class="line">  about: &#x2F;about&#x2F; || user</span><br><span class="line">  tags: &#x2F;tags&#x2F; || tags</span><br><span class="line">  categories: &#x2F;categories&#x2F; || th</span><br><span class="line">  # archives: &#x2F;archives&#x2F; || archive</span><br><span class="line">  # schedule: &#x2F;schedule&#x2F; || calendar</span><br><span class="line">  # sitemap: &#x2F;sitemap.xml || sitemap</span><br><span class="line">  # commonweal: &#x2F;404&#x2F; || heartbeat</span><br></pre></td></tr></table></figure>
+
+<p>在<code>git bash</code>下执行以下命令，会在 <code>D:\myblogs\source</code> 中创建对应的文件夹</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo new page categories</span><br><span class="line">hexo new page about</span><br><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
+
+
+
+<br>
+
+<h3 id="设置侧栏"><a href="#设置侧栏" class="headerlink" title="设置侧栏"></a>设置侧栏</h3><p>默认情况下，侧栏仅在文章页面（拥有目录列表）时才显示，并放置于右侧位置。</p>
+<p> 可以通过修改 <strong>主题配置文件</strong> 中的 <code>sidebar</code> 字段来控制侧栏的行为。</p>
+<p>侧栏的设置包括两个部分，其一是侧栏的位置， 其二是侧栏显示的时机。</p>
+<p>设置侧栏的位置，修改 <code>sidebar.position</code> 的值，支持的选项有：</p>
+<ul>
+<li>left - 靠左放置</li>
+<li>right - 靠右放置</li>
+</ul>
+<p><code>D:\myblogs\themes\next\_config.yml</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sidebar:</span><br><span class="line">  # Sidebar Position.</span><br><span class="line">  position: left</span><br><span class="line">  #position: right</span><br></pre></td></tr></table></figure>
+
+<p>设置侧栏显示的时机，修改 <code>sidebar.display</code> 的值，支持的选项有：</p>
+<ul>
+<li><code>post</code> - 默认行为，在文章页面（拥有目录列表）时显示</li>
+<li><code>always</code> - 在所有页面中都显示</li>
+<li><code>hide</code> - 在所有页面中都隐藏（可以手动展开）</li>
+<li><code>remove</code> - 完全移除</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sidebar:</span><br><span class="line">  display: post</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="设置头像"><a href="#设置头像" class="headerlink" title="设置头像"></a>设置头像</h3><p>编辑 <strong>主题配置文件</strong>， 修改字段 <code>avatar</code>， 值设置成头像的链接地址。其中，头像的链接地址可以是：</p>
+<table>
+<thead>
+<tr>
+<th align="left">地址</th>
+<th align="left">值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">完整的互联网 URI</td>
+<td align="left"><code>http://example.com/avatar.png</code></td>
+</tr>
+<tr>
+<td align="left">站点内的地址</td>
+<td align="left">将头像放置主题目录下的 <code>source/uploads/</code> （新建 uploads 目录若不存在）  <br />配置为：<code>avatar: /uploads/avatar.png</code>或者 放置在 <code>source/images/</code> 目录下<br />  配置为：<code>avatar: /images/avatar.png</code></td>
+</tr>
+</tbody></table>
+<p><code>D:\myblogs\themes\next\_config.yml</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Sidebar Avatar</span><br><span class="line">avatar:</span><br><span class="line">  # Replace the default image and set the url here.</span><br><span class="line">  url: &#x2F;uploads&#x2F;little_black.png</span><br><span class="line">  # If true, the avatar will be dispalyed in circle.</span><br><span class="line">  # 如果设置为 true，头像将展示为圆形</span><br><span class="line">  rounded: false</span><br><span class="line">  # 如果设置为 ture，当鼠标经过头像时，头像会跟随鼠标转动</span><br><span class="line">  # If true, the avatar will be rotated with the cursor.</span><br><span class="line">  rotated: false</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/03/06/Hexo/touxaing.png" class="" title="头像展示效果">
+
+<br>
+
+<h3 id="设置作者昵称"><a href="#设置作者昵称" class="headerlink" title="设置作者昵称"></a>设置作者昵称</h3><p>编辑 <strong>站点配置文件</strong>， 设置 <code>author</code> 为你的昵称。</p>
+<p><code>D:\myblogs\_config.yml</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">author: naiveliberty</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="站点描述"><a href="#站点描述" class="headerlink" title="站点描述"></a>站点描述</h3><p>编辑 <strong>站点配置文件</strong>， 设置 <code>description</code> 字段为你的站点描述。站点描述可以是你喜欢的一句签名:)</p>
+<p><code>D:\myblogs\_config.yml</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">description: &#39;一给我里giao&#39;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="评论系统"><a href="#评论系统" class="headerlink" title="评论系统"></a>评论系统</h3><p> <strong>LiveRe</strong></p>
+<ol>
+<li><p>注册 <code>LiveRe</code>并登录，<code>https://www.livere.com/</code></p>
+</li>
+<li><p>选择City版本：是一款适合所有人使用的免费版本</p>
+</li>
+<li><p>填写信息获取</p>
+<img src="/2020/03/06/Hexo/livere-get-code.png" class="" title="填写信息获取livere_uid">
+</li>
+<li><p>填写完成后，进入到 <code>管理页面 -&gt; 代码管理 -&gt; 一般网站</code> 代码中，<code>data-uid</code> 即为所需 <code>uid</code></p>
+</li>
+</ol>
+<p>编辑 <strong>主题配置文件</strong>， 编辑 <code>livere_uid</code> 字段，设置如下：</p>
+<p><code>D:\myblogs\themes\next\_config.yml</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">livere_uid: #your livere_uid</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="数据统计与分析"><a href="#数据统计与分析" class="headerlink" title="数据统计与分析"></a>数据统计与分析</h3><p><strong>不蒜子统计</strong></p>
+<p>编辑 <strong>主题配置文件</strong> 中的<code>busuanzi_count</code>的配置项。</p>
+<p>当<code>enable: true</code>时，代表开启全局开关。若<code>site_uv</code>、<code>site_pv</code>、<code>page_pv</code>的值均为<code>false</code>时，不蒜子仅作记录而不会在页面上显示。</p>
+<p><code>D:\myblogs\themes\next\_config.yml</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">busuanzi_count:</span><br><span class="line">  enable: true</span><br><span class="line">  total_visitors: true</span><br><span class="line">  total_visitors_icon: user</span><br><span class="line">  total_views: true</span><br><span class="line">  total_views_icon: eye</span><br><span class="line">  post_views: true</span><br><span class="line">  post_views_icon: eye</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="博客内容添加图片"><a href="#博客内容添加图片" class="headerlink" title="博客内容添加图片"></a>博客内容添加图片</h3><p>修改<strong>站点配置文件</strong>，修改post_asset_folder值为 ture后，在建立文件时，Hexo会自动建立一个与文章同名的文件夹，您可以把与该文章相关的所有资源都放到那个文件夹。</p>
+<p><code>D:\myblogs\_config.yml</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">post_asset_folder: true</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/03/06/Hexo/addimage.png" class="" title="自动建立一个与文章同名的文件夹">
+
+<br>
+
+<h3 id="图片弹出效果"><a href="#图片弹出效果" class="headerlink" title="图片弹出效果"></a>图片弹出效果</h3><p>进入<strong>next主题目录</strong>下执行:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd themes&#x2F;next&#x2F;</span><br><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;theme-next-fancybox3 source&#x2F;lib&#x2F;fancybox</span><br></pre></td></tr></table></figure>
+
+<p>修改<strong>主题配置文件</strong>,设置fancybox: true</p>
+<p><code>D:\myblogs\themes\next\_config.yml</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># FancyBox is a tool that offers a nice and elegant way to add zooming functionality for images.</span><br><span class="line"># For more information: https:&#x2F;&#x2F;fancyapps.com&#x2F;fancybox</span><br><span class="line">fancybox: true</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="本地搜索功能"><a href="#本地搜索功能" class="headerlink" title="本地搜索功能"></a>本地搜索功能</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cnpm install hexo-generator-searchdb --save</span><br><span class="line">&#x2F;&#x2F;安装搜索插件</span><br></pre></td></tr></table></figure>
+
+<p>修改<strong>主题配置文件</strong>中的<code>local_search</code>配置信息</p>
+<p><code>D:\myblogs\themes\next\_config.yml</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># Local Search</span><br><span class="line"># Dependencies: https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-generator-searchdb</span><br><span class="line">local_search:</span><br><span class="line">  enable: true</span><br><span class="line">  # If auto, trigger search by changing input.</span><br><span class="line">  # If manual, trigger search by pressing enter key or search button.</span><br><span class="line">  trigger: auto</span><br><span class="line">  # Show top n results per article, show all results by setting to -1</span><br><span class="line">  top_n_per_article: 1</span><br><span class="line">  # Unescape html strings to the readable one.</span><br><span class="line">  unescape: false</span><br><span class="line">  # Preload the search data when the page loads.</span><br><span class="line">  preload: false</span><br></pre></td></tr></table></figure>
+
+<img src="/2020/03/06/Hexo/search.png" class="" title="搜索入口">
+
+<br>
+
+<br>
+
+<h2 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h2><h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><ol>
+<li><p>注册、登录Github</p>
+</li>
+<li><p>新建仓库，新建仓库名必须是 yourname(你的用户名).github.io</p>
+<img src="/2020/03/06/Hexo/create.png" class="" title="新建仓库">
+
+</li>
+</ol>
+<br>
+
+<h3 id="配置SSH-key"><a href="#配置SSH-key" class="headerlink" title="配置SSH key"></a>配置SSH key</h3><p>在git Bash输入: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~&#x2F;.ssh</span><br></pre></td></tr></table></figure>
+
+<p>如果提示：No such file or directory 说明你是第一次使用git，使用一下命令生成密钥</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;你的Github邮箱地址&quot;</span><br></pre></td></tr></table></figure>
+
+<p>然后来连续回车3次，在 <code>~/.ssh</code>目录下找到 <code>id_rsa.pub</code>文件，打开该文件并复制里面的内容，到你的 Github 主页，进入个人设置 -&gt; SSH and GPG keys -&gt; New SSH key 中的 Key 选项框</p>
+<p>title 随便填，点击保存</p>
+<img src="/2020/03/06/Hexo/ssh.png" class="" title="新建SSH Key">
+
+<br>
+
+<h3 id="测试是否设置成功"><a href="#测试是否设置成功" class="headerlink" title="测试是否设置成功"></a>测试是否设置成功</h3><p>在Bash git 中输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
+<p>可能会提示：<code>Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></p>
+<p>输入yes，确认连接</p>
+<p><code>Hi naiveliberty! You&#39;ve successfully authenticated, but GitHub does not provide shell access.</code></p>
+<p>出现以上信息表示 SSH 配置成功</p>
+<br>
+
+<h3 id="配置-git-config"><a href="#配置-git-config" class="headerlink" title="配置 git config"></a>配置 git config</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;username&quot; &#x2F;&#x2F;你的github用户名</span><br><span class="line">git config --global user.email &quot;email&quot;	&#x2F;&#x2F;你的github注册邮箱</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="在-站点配置文件最后添加你的仓库地址"><a href="#在-站点配置文件最后添加你的仓库地址" class="headerlink" title="在 站点配置文件最后添加你的仓库地址"></a>在 站点配置文件最后添加你的仓库地址</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:naiveliberty&#x2F;naiveliberty.github.io.git &#x2F;&#x2F;你自己该项目的仓库地址</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="部署本地站点到github"><a href="#部署本地站点到github" class="headerlink" title="部署本地站点到github"></a>部署本地站点到github</h3><ol>
+<li>安装 <code>cnpm install hexo-deployer-git --save</code></li>
+<li><code>hexo clean</code> 清除生成的静态网页缓存数据</li>
+<li><code>hexo g</code>生成文章对应的静态页面</li>
+<li><code>hexo d</code>部署本地站点到github</li>
+</ol>
+<br>
+
+<br>
+
+<h2 id="编写博客日常使用的命令"><a href="#编写博客日常使用的命令" class="headerlink" title="编写博客日常使用的命令"></a>编写博客日常使用的命令</h2><h3 id="Hexo-1"><a href="#Hexo-1" class="headerlink" title="Hexo"></a>Hexo</h3><ol>
+<li><code>hexo init</code>初始化站点目录</li>
+<li><code>hexo g</code>生成文章对应的静态页面</li>
+<li><code>hexo s</code>启动本地服务</li>
+<li><code>hexo clean</code>清除生成的静态网页缓存数据</li>
+<li><code>hexo new [layout] &lt;title&gt;</code>，生成博客文件<ol>
+<li>例如<code>hexo new post &#39;test&#39;</code>常见布局格式为 post 的文件 test.md</li>
+<li>生成的文件会放在站点目录中的<code>source/_post</code>目录下，例如：<code>D:\myblogs\source\_posts</code></li>
+<li>布局格式可查看 Hexo 的官方文档，这里使用 post 举例</li>
+</ol>
+</li>
+<li>删除博客只需要删除站点目录中的<code>source/_post</code>目录下，对应的博客文件，然后执行 <code>hexo clean</code>即可</li>
+<li><code>hexo d</code>部署本地站点到github</li>
+</ol>
+<br>
+
+<h3 id="在文章中添加图片在文章中添加图片"><a href="#在文章中添加图片在文章中添加图片" class="headerlink" title="在文章中添加图片在文章中添加图片"></a>在文章中添加图片在文章中添加图片</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;% asset_img test.png 这是测试图片%&#125;</span><br><span class="line"></span><br><span class="line">test.png      --图片的名字</span><br><span class="line">这是测试图片    --图片的说明信息，紧贴这图片下边显示</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="博客文件开头信息的含义"><a href="#博客文件开头信息的含义" class="headerlink" title="博客文件开头信息的含义"></a>博客文件开头信息的含义</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">title: 博客标题</span><br><span class="line">date: 时间</span><br><span class="line">tags: 标签类别</span><br><span class="line">categories: 分类属性</span><br><span class="line">comments: 该片博客是否启用第三方评论，默认为开启，false为关闭</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="首页部分显示一篇文章的部分内容"><a href="#首页部分显示一篇文章的部分内容" class="headerlink" title="首页部分显示一篇文章的部分内容"></a>首页部分显示一篇文章的部分内容</h3><ul>
+<li>文章中使用<code>&lt;!-- more --&gt;</code>手动进行截断，官方推荐</li>
+</ul>
+<br>
+
+<h3 id="同步到-Github"><a href="#同步到-Github" class="headerlink" title="同步到 Github"></a>同步到 Github</h3><p>每次在本地对博客进行增删改操作后，可以使用一下命令更新到线上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<br>
+
+<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><ul>
+<li>本篇博客只介绍了Hexo 和 Next 部分配置，更多设置请参考官方文档</li>
+<li>博客内容使用 <code>Markdown</code> 编写，推荐使用 <code>Markdown</code>编辑软件 <code>Typora</code></li>
+<li>Hexo官方文档：<code>https://hexo.io/zh-cn/docs</code></li>
+<li>Next 官方文档：<code>http://theme-next.iissnan.com/getting-started.html</code></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80ODk2Ni8yNTQ2MA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地环境"><span class="nav-number">2.</span> <span class="nav-text">本地环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">3.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-js"><span class="nav-number">3.1.</span> <span class="nav-text">Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git"><span class="nav-number">3.2.</span> <span class="nav-text">Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo"><span class="nav-number">3.3.</span> <span class="nav-text">Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Next"><span class="nav-number">3.4.</span> <span class="nav-text">Next</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">4.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启用主题"><span class="nav-number">4.1.</span> <span class="nav-text">启用主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证主题"><span class="nav-number">4.2.</span> <span class="nav-text">验证主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主题设定"><span class="nav-number">4.3.</span> <span class="nav-text">主题设定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置语言"><span class="nav-number">4.4.</span> <span class="nav-text">设置语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置菜单"><span class="nav-number">4.5.</span> <span class="nav-text">设置菜单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置侧栏"><span class="nav-number">4.6.</span> <span class="nav-text">设置侧栏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置头像"><span class="nav-number">4.7.</span> <span class="nav-text">设置头像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置作者昵称"><span class="nav-number">4.8.</span> <span class="nav-text">设置作者昵称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#站点描述"><span class="nav-number">4.9.</span> <span class="nav-text">站点描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#评论系统"><span class="nav-number">4.10.</span> <span class="nav-text">评论系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据统计与分析"><span class="nav-number">4.11.</span> <span class="nav-text">数据统计与分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#博客内容添加图片"><span class="nav-number">4.12.</span> <span class="nav-text">博客内容添加图片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片弹出效果"><span class="nav-number">4.13.</span> <span class="nav-text">图片弹出效果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地搜索功能"><span class="nav-number">4.14.</span> <span class="nav-text">本地搜索功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Github"><span class="nav-number">5.</span> <span class="nav-text">Github</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建仓库"><span class="nav-number">5.1.</span> <span class="nav-text">创建仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置SSH-key"><span class="nav-number">5.2.</span> <span class="nav-text">配置SSH key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试是否设置成功"><span class="nav-number">5.3.</span> <span class="nav-text">测试是否设置成功</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-git-config"><span class="nav-number">5.4.</span> <span class="nav-text">配置 git config</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在-站点配置文件最后添加你的仓库地址"><span class="nav-number">5.5.</span> <span class="nav-text">在 站点配置文件最后添加你的仓库地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署本地站点到github"><span class="nav-number">5.6.</span> <span class="nav-text">部署本地站点到github</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写博客日常使用的命令"><span class="nav-number">6.</span> <span class="nav-text">编写博客日常使用的命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo-1"><span class="nav-number">6.1.</span> <span class="nav-text">Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在文章中添加图片在文章中添加图片"><span class="nav-number">6.2.</span> <span class="nav-text">在文章中添加图片在文章中添加图片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#博客文件开头信息的含义"><span class="nav-number">6.3.</span> <span class="nav-text">博客文件开头信息的含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#首页部分显示一篇文章的部分内容"><span class="nav-number">6.4.</span> <span class="nav-text">首页部分显示一篇文章的部分内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同步到-Github"><span class="nav-number">6.5.</span> <span class="nav-text">同步到 Github</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结尾"><span class="nav-number">7.</span> <span class="nav-text">结尾</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="naiveliberty"
+      src="/uploads/little_black.png">
+  <p class="site-author-name" itemprop="name">naiveliberty</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/naiveliberty" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;naiveliberty" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/p/1005055687731222" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;p&#x2F;1005055687731222" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:fthemuse@foxmail.com" title="E-Mail → mailto:fthemuse@foxmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">naiveliberty</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.2
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
